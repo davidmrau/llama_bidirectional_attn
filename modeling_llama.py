@@ -669,9 +669,6 @@ class LlamaSdpaAttention(LlamaAttention):
             key_states = key_states.contiguous()
             value_states = value_states.contiguous()
 
-        print(causal_mask.shape)
-        print(query_states.shape)
-        print(attention_mask.shape)
         attn_output = torch.nn.functional.scaled_dot_product_attention(
             query_states,
             key_states,
