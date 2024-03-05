@@ -495,7 +495,6 @@ class LlamaFlashAttention2(LlamaAttention):
 
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size).contiguous()
         attn_output = self.o_proj(attn_output)
-        #print(attn_output[0])
         if not output_attentions:
             attn_weights = None
 
@@ -684,7 +683,6 @@ class LlamaSdpaAttention(LlamaAttention):
         attn_output = attn_output.view(bsz, q_len, self.hidden_size)
 
         attn_output = self.o_proj(attn_output)
-        #print(attn_output[0])
         return attn_output, None, past_key_value
 
 LLAMA_ATTENTION_CLASSES = {
@@ -1111,7 +1109,6 @@ class LlamaModel(LlamaPreTrainedModel):
                 # Details: https://github.com/pytorch/pytorch/issues/110213
                 causal_mask = causal_mask.mul(~torch.all(causal_mask == min_dtype, dim=-1, keepdim=True)).to(dtype)
 
-        print(causal_mask[0])
         return causal_mask
 
 
